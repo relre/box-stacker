@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
-    public List<Button> leveller;  //leveller listesi
+    public List<Button> levels;  //leveller listesi
 
     private void Start()
     {
@@ -14,36 +14,35 @@ public class LevelSystem : MonoBehaviour
             PlayerPrefs.SetInt("level", 1);
         //  if (!PlayerPrefs.HasKey("seviyeSayisi")) //default deðer atama level adlý bir key yoksa 1 atamasý yapýyor
 
-        kilitleriAc(); //açýk olan levelleri açýyor
+        lockOpen(); //açýk olan levelleri açýyor
     }
 
-    public void kilitleriAc()//açýlan bölümlerin týklanabilirliðini aktif hale getiriyor.
+    public void lockOpen()//açýlan bölümlerin týklanabilirliðini aktif hale getiriyor.
     {
         for (int i = 0; i < PlayerPrefs.GetInt("level"); i++)
         {
-            leveller[i].interactable = true;
+            levels[i].interactable = true;
         }
     }
 
-    public string levelAdi(int id)//id den level'in ismini döndürüyor
+    public string levelID(int id)//id den level'in ismini döndürüyor
     {
         string scenePath = SceneUtility.GetScenePathByBuildIndex(id);
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
         return sceneName;
     }
 
-    public void levelAc(int id)//buton üzerinden gelen id ye göre level açýlýyor
+    public void levelOpen(int id)//buton üzerinden gelen id ye göre level açýlýyor
     {
         //PlayerPrefs.SetString("suankiSecilenLevel", levelAdi(id));dawdaw
-        SceneManager.LoadScene(levelAdi(id));
+        SceneManager.LoadScene(levelID(id));
     }
 
     public void ClearPref() //Levelleri Sýfýrlama
     {
-        PlayerPrefs.DeleteKey("yildizlar");
         PlayerPrefs.DeleteKey("level");
         PlayerPrefs.DeleteKey("suankiSecilenLevel");
-        PlayerPrefs.DeleteKey("seviyeSayisi");
+        PlayerPrefs.DeleteKey("levelNumber");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  //aktif sahneyi yeniden yüklüyor
     }
 }

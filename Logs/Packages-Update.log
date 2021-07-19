@@ -44,3 +44,36 @@ The following packages were added:
   com.unity.textmeshpro@3.0.4
   com.unity.timeline@1.4.7
   com.unity.ugui@1.0.0
+
+=== Mon Jul 19 08:08:05 2021
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were updated:
+  com.unity.ide.visualstudio from version 2.0.11 to 2.0.7
+  com.unity.test-framework from version 1.1.27 to 1.1.24
+  com.unity.textmeshpro from version 3.0.6 to 3.0.4
+  com.unity.timeline from version 1.4.8 to 1.4.7
+
+=== Mon Jul 19 08:43:11 2021
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were updated:
+  com.unity.ide.visualstudio from version 2.0.11 to 2.0.7
+  com.unity.test-framework from version 1.1.27 to 1.1.24
+  com.unity.textmeshpro from version 3.0.6 to 3.0.4
+  com.unity.timeline from version 1.4.8 to 1.4.7
+
+=== Mon Jul 19 08:46:05 2021
+
+Packages were changed.
+Update Mode: resetToDefaultDependencies
+
+The following packages were updated:
+  com.unity.ide.visualstudio from version 2.0.11 to 2.0.7
+  com.unity.test-framework from version 1.1.27 to 1.1.24
+  com.unity.textmeshpro from version 3.0.6 to 3.0.4
+  com.unity.timeline from version 1.4.8 to 1.4.7
