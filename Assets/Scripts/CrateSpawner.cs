@@ -12,7 +12,7 @@ public class CrateSpawner : MonoBehaviour
     public GameObject endLevelPanel;
     public GameObject failedLevelPanel;
     public GameObject nextLevelPanel;
-    public Button currentLevelButton;
+    public TextMeshProUGUI currentLevelText;
     public TextMeshProUGUI spawnableCrateText;
     SceneChanger sceneChanger;
     public float ghostSpeed = 0.1f;
@@ -72,16 +72,16 @@ public class CrateSpawner : MonoBehaviour
 
         spawnableCrate = 30;
         spawnableCrate -= currentLevelIDx * 2;
-        spawnableCrateText.text = "Kalan kutu sayýsý: " + spawnableCrate.ToString();
+        spawnableCrateText.text = spawnableCrate.ToString();
 
     }
     void PlayController()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGameActive && spawnableCrate > 0)
+        if (Input.GetButtonDown("Fire1") && isGameActive && spawnableCrate > 0)
         {
             Instantiate(cratePrefab, ghostPos, transform.rotation);
             spawnableCrate--;
-            spawnableCrateText.text = "Kalan kutu sayýsý: " + spawnableCrate.ToString();
+            spawnableCrateText.text = spawnableCrate.ToString();
             Debug.Log(spawnableCrate);
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
@@ -139,7 +139,7 @@ public class CrateSpawner : MonoBehaviour
     {
         string currentLevelx = levelID(SceneManager.GetActiveScene().buildIndex);
         int currentLevelIDx = int.Parse(currentLevelx.Split('_')[1]);
-        currentLevelButton.GetComponentInChildren<TextMeshProUGUI>().text = "okan" + currentLevelIDx + currentLevelx;
+        currentLevelText.text = currentLevelIDx.ToString();
     }
     void FailedLevelPanel()
     {
