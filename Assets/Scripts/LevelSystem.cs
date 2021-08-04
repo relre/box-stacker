@@ -6,43 +6,49 @@ using UnityEngine.UI;
 
 public class LevelSystem : MonoBehaviour
 {
-    public List<Button> levels;  //leveller listesi
+    SoundManager soundManager;
+    public List<Button> levels;  // levels list
+    public Texture lockOpenTexture;
 
     private void Start()
     {
-        if (!PlayerPrefs.HasKey("level")) //default deðer atama level adlý bir key yoksa 1 atamasý yapýyor
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        if (!PlayerPrefs.HasKey("level")) 
             PlayerPrefs.SetInt("level", 1);
-        //  if (!PlayerPrefs.HasKey("seviyeSayisi")) //default deðer atama level adlý bir key yoksa 1 atamasý yapýyor
-
-        lockOpen(); //açýk olan levelleri açýyor
+        lockOpen();
     }
 
-    public void lockOpen()//açýlan bölümlerin týklanabilirliðini aktif hale getiriyor.
+
+    public void lockOpen()
     {
         for (int i = 0; i < PlayerPrefs.GetInt("level"); i++)
         {
-            levels[i].interactable = true;
+            levels[i].interactable = true; 
+            levels[i].GetComponent<RawImage>().texture = lockOpenTexture; // button lock texture
+            levels[i].GetComponent<Button>().onClick.AddListener(soundManager.AudioButton); // button click sound
         }
+        Debug.Log(PlayerPrefs.GetInt("level") + "lockOpen level sayýsý");
     }
 
-    public string levelID(int id)//id den level'in ismini döndürüyor
+    public string levelID(int id)
     {
         string scenePath = SceneUtility.GetScenePathByBuildIndex(id);
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
         return sceneName;
     }
 
-    public void levelOpen(int id)//buton üzerinden gelen id ye göre level açýlýyor
+    public void levelOpen(int id)
     {
-        //PlayerPrefs.SetString("suankiSecilenLevel", levelAdi(id));dawdaw
         SceneManager.LoadScene(levelID(id));
     }
 
-    public void ClearPref() //Levelleri Sýfýrlama
+    public void ClearPref() // clear all prefs
     {
         PlayerPrefs.DeleteKey("level");
         PlayerPrefs.DeleteKey("suankiSecilenLevel");
         PlayerPrefs.DeleteKey("levelNumber");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  //aktif sahneyi yeniden yüklüyor
+        PlayerPrefs.DeleteKey("sounds");
+        PlayerPrefs.DeleteKey("musics");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  
     }
 }

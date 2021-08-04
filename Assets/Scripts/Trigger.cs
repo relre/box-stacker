@@ -21,7 +21,7 @@ public class Trigger : MonoBehaviour
     {
         crateSpawner.yHeight++;
         crateSpawner.ghostSpeed = (crateSpawner.ghostSpeed * 7) / 10;
-        Debug.Log(crateSpawner.yHeight);
+        
        
     }
 }

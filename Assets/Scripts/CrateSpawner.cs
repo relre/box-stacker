@@ -7,6 +7,13 @@ using UnityEngine.UI;
 
 public class CrateSpawner : MonoBehaviour
 {
+    public GameObject homeUI;
+    public GameObject inGameUI;
+    public GameObject inGameObjects;
+    public GameObject levelListUI;
+    public GameObject settingsUI;
+
+    public TextMeshProUGUI levelMenuText;
     public GameObject cratePrefab;
     public GameObject ghostPrefab;
     public GameObject endLevelPanel;
@@ -15,11 +22,12 @@ public class CrateSpawner : MonoBehaviour
     public TextMeshProUGUI currentLevelText;
     public TextMeshProUGUI spawnableCrateText;
     SceneChanger sceneChanger;
-    public float ghostSpeed = 0.1f;
+    public float ghostSpeed;
     public int yHeight = 2;
     public int spawnableCrate;
     int yHeightMax = 8;
-    bool isGameActive = true;
+    bool isGameActive = false;
+    public float timer = 0f;
 
 
     Vector3 cratePos;
@@ -29,6 +37,7 @@ public class CrateSpawner : MonoBehaviour
 
     void Start()
     {
+        isGameActive = true;
         StartCoroutine(GhostMover());
         sceneChanger = GameObject.Find("SceneChanger").GetComponent<SceneChanger>();
 
@@ -38,8 +47,17 @@ public class CrateSpawner : MonoBehaviour
 
     void Update()
     {
+        timer += Time.deltaTime;
         ghostPos = ghostPrefab.transform.position - new Vector3(0, 1.1f, 0);
 
+        if (PlayerPrefs.GetString("sounds") == "offsound")
+        {
+            cratePrefab.GetComponent<AudioSource>().mute = true;
+        }
+        if (PlayerPrefs.GetString("sounds") == "onsound")
+        {
+            cratePrefab.GetComponent<AudioSource>().mute = false;
+        }
         PlayController();
     }
 
@@ -66,23 +84,52 @@ public class CrateSpawner : MonoBehaviour
     }
     void LevelDiffuculty()
     {
-
         string currentLevelx = levelID(SceneManager.GetActiveScene().buildIndex);
         int currentLevelIDx = int.Parse(currentLevelx.Split('_')[1]);
 
-        spawnableCrate = 30;
-        spawnableCrate -= currentLevelIDx * 2;
+        if (currentLevelIDx >= 0 && currentLevelIDx <= 5)
+        {
+            ghostSpeed = 0.15f;
+            spawnableCrate = 34;
+            spawnableCrate -= currentLevelIDx * 4;
+        }
+        else if (currentLevelIDx >= 5 && currentLevelIDx <= 10)
+        {
+            ghostSpeed = 0.15f;
+            spawnableCrate = 22;
+            spawnableCrate -= currentLevelIDx * 2;
+        }
+        else if (currentLevelIDx >= 10 && currentLevelIDx <= 15)
+        {
+            ghostSpeed = 0.13f;
+            spawnableCrate = 22;
+            spawnableCrate -= currentLevelIDx * 2;
+        }
+        else if (currentLevelIDx >= 15 && currentLevelIDx <= 20)
+        {
+            ghostSpeed = 0.10f;
+            spawnableCrate = 22;
+            spawnableCrate -= currentLevelIDx * 2;
+        }
+        else if (currentLevelIDx >= 20 && currentLevelIDx <= 25)
+        {
+            ghostSpeed = 0.10f;
+            spawnableCrate = 20;
+            spawnableCrate -= currentLevelIDx * 3;
+        }
         spawnableCrateText.text = spawnableCrate.ToString();
 
     }
     void PlayController()
     {
-        if (Input.GetButtonDown("Fire1") && isGameActive && spawnableCrate > 0)
+
+        if (Input.GetButtonDown("Fire1") && isGameActive && spawnableCrate > 0 && timer > 1f)
         {
             Instantiate(cratePrefab, ghostPos, transform.rotation);
             spawnableCrate--;
             spawnableCrateText.text = spawnableCrate.ToString();
-            Debug.Log(spawnableCrate);
+
+
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -92,50 +139,41 @@ public class CrateSpawner : MonoBehaviour
                 StartCoroutine(GhostMover());
             }
         }
-        else if (yHeight >= yHeightMax)
+        else if (yHeight >= yHeightMax) // win this level
         {
             isGameActive = false;
-            ghostPrefab.gameObject.SetActive(false);
             NextLevelController();
+            
         }
-        else if (spawnableCrate == 0)
+        else if (spawnableCrate == 0 && !(yHeight >= yHeightMax) && isGameActive && inGameUI.activeInHierarchy == true) // lose this level
         {
             FailedLevelPanel();
         }
     }
     void NextLevelController()
     {
-        string currentLevel = levelID(SceneManager.GetActiveScene().buildIndex);// (PlayerPrefs.GetString("suankiSecilenLevel");) Yenilendi çünkü level ekranýndan geçiþte kaydettiðimiz leveli alýyorduk fakat sonraki levele bu sahneden geçince kayýtlý level eskisi kalýyor o yüzden direk aktif sahne build indexinden adýný çaðýrýp iþlem yaptýrýyoruz.
-        int currentLevelID = int.Parse(currentLevel.Split('_')[1]); //Level_id biçiminde olduðundan saðtaraf yani (id) 
+        string currentLevel = levelID(SceneManager.GetActiveScene().buildIndex);
+        int currentLevelID = int.Parse(currentLevel.Split('_')[1]); 
 
         int nextLevel = PlayerPrefs.GetInt("level") + 1;
 
         if (currentLevelID == PlayerPrefs.GetInt("levelNumber"))
         {
             Debug.Log("Oyun Sonu");
-
-            endLevelPanel.transform.GetChild(1).gameObject.SetActive(false); //sonraki level butonunu kapatýyoruz oyun sonuna gelindiði için
+            endLevelPanel.transform.GetChild(1).gameObject.SetActive(false);
         }
         else
         {
             if (nextLevel - currentLevelID == 1)
+            {
                 PlayerPrefs.SetInt("level", nextLevel);
-            else
-                Debug.Log("Önceden Açýlmýþ bir bölüme girdiniz.");
-
-            // endLevelPanel.gameObject.SetActive(true);
-            // nextLevelPanel.gameObject.SetActive(true); // sonraki level butonu aktif(eðer son bolüme kadar gidip tekrar onceki bolumlere girerse diye aktif hale getiriyoruz.)          
+                Debug.Log(nextLevel - currentLevelID + " " + PlayerPrefs.GetInt("level")); 
+            }
         }
         EndLevelPanel(); // end level panel open
     }
 
-
-
-
-
-    public string orjinal;
-
-    void LevelNumberUI()
+    void LevelNumberUI() // level number
     {
         string currentLevelx = levelID(SceneManager.GetActiveScene().buildIndex);
         int currentLevelIDx = int.Parse(currentLevelx.Split('_')[1]);
@@ -144,15 +182,31 @@ public class CrateSpawner : MonoBehaviour
     void FailedLevelPanel()
     {
         failedLevelPanel.SetActive(true);
+        if (PlayerPrefs.GetString("sounds") == "offsound")
+        {
+            failedLevelPanel.GetComponent<AudioSource>().mute = true;
+        }
+        if (PlayerPrefs.GetString("sounds") == "onsound")
+        {
+            failedLevelPanel.GetComponent<AudioSource>().mute = false;
+        }
     }
     private void EndLevelPanel()
     {
-        endLevelPanel.SetActive(true);//Panel Aç
-
+        endLevelPanel.SetActive(true);
+        if (PlayerPrefs.GetString("sounds") == "offsound")
+        {
+            endLevelPanel.GetComponent<AudioSource>().mute = true;
+        }
+        if (PlayerPrefs.GetString("sounds") == "onsound")
+        {
+            endLevelPanel.GetComponent<AudioSource>().mute = false;
+        }
     }
     public void EndLevelPanelCloser() 
     {
         endLevelPanel.SetActive(false);
+ 
     }
 
     string levelID(int id) // id to level id
@@ -166,12 +220,44 @@ public class CrateSpawner : MonoBehaviour
     public void NextLevel() // next level button
     {
         sceneChanger.SceneChange(levelID(SceneManager.GetActiveScene().buildIndex + 1));
-        EndLevelPanelCloser();
     }
 
     public void PlayAgain() // play again button
     {
         sceneChanger.SceneChange(levelID(SceneManager.GetActiveScene().buildIndex));
-        EndLevelPanelCloser();
     }
+
+    public void HomeButton()
+    {
+        SceneManager.LoadScene("login");
+    }
+    public void LevelButton()
+    {
+        homeUI.SetActive(false);
+        levelListUI.SetActive(true);
+        levelMenuText.text = "LEVELS";
+    }
+    public void PlayButton()
+    {
+        homeUI.SetActive(false);
+        levelListUI.SetActive(true);
+        levelMenuText.text = "SELECT LEVEL";
+    }
+    public void SettingButton()
+    {
+        homeUI.SetActive(false);
+        settingsUI.SetActive(true);
+        
+    }  
+    public void SettingButtonInGame()
+    {
+        isGameActive = false;
+        settingsUI.SetActive(true);
+    }
+    public void SettingButtonInGamePlayerPref()
+    {
+        sceneChanger.SceneChange(levelID(SceneManager.GetActiveScene().buildIndex));
+        settingsUI.SetActive(false);
+    }
+
 }
