@@ -13,10 +13,85 @@ EditorBuildSettings:
     guid: 3a29f04b3982e5c4ca466212334670c2
   - enabled: 1
     path: Assets/Levels/level_2.unity
-    guid: e5366dad3a700554fb72e5195e4311ad
+    guid: 26e187bacde2a1b44828af6690464d92
   - enabled: 1
     path: Assets/Levels/level_3.unity
-    guid: e5aba55bcd0e11c4aa9b59e10789fc22
+    guid: 0c9b3faf4f8f42745bb3a2287979c46c
+  - enabled: 1
+    path: Assets/Levels/level_4.unity
+    guid: 09e61210cae2ee74caf093f4b04440da
+  - enabled: 1
+    path: Assets/Levels/level_5.unity
+    guid: 45419fce13d05e94dad0a4a0a8c0ecd1
+  - enabled: 1
+    path: Assets/Levels/level_6.unity
+    guid: 4e986551ca704b1438d9be39a8f88883
+  - enabled: 1
+    path: Assets/Levels/level_7.unity
+    guid: a17a5cf145167eb4cae751482c6b55e7
+  - enabled: 1
+    path: Assets/Levels/level_8.unity
+    guid: 0a171190c78c13f47a33ec686b548233
+  - enabled: 1
+    path: Assets/Levels/level_9.unity
+    guid: 1fa18795c2d7aaa48af81a3de235e41f
+  - enabled: 1
+    path: Assets/Levels/level_10.unity
+    guid: a9ef90e10fa8d3d4fa6b79ea7b26ba32
+  - enabled: 1
+    path: Assets/Levels/level_11.unity
+    guid: 7b48ae018d7a6394e9c50f2495a7a401
+  - enabled: 1
+    path: Assets/Levels/level_12.unity
+    guid: 0253e074564d2fb4dbef8d77d2d5f0cd
+  - enabled: 1
+    path: Assets/Levels/level_13.unity
+    guid: c17fb76214afe01478a8e81078b02a9e
+  - enabled: 1
+    path: Assets/Levels/level_14.unity
+    guid: 32c133947e778bf49bcfbadb24f0c7eb
+  - enabled: 1
+    path: Assets/Levels/level_15.unity
+    guid: 747a779fd23e7de4e8819212bc7b3896
+  - enabled: 1
+    path: Assets/Levels/level_16.unity
+    guid: 118cc0a4f453eb7499afc1e4801d8374
+  - enabled: 1
+    path: Assets/Levels/level_17.unity
+    guid: d8dc016ea1f56234891663a414ad10a3
+  - enabled: 1
+    path: Assets/Levels/level_18.unity
+    guid: 9ab648cda9f34a740b1a4560feeb77cd
+  - enabled: 1
+    path: Assets/Levels/level_19.unity
+    guid: 6c2c6c513c6e9e84383b218af937baf3
+  - enabled: 1
+    path: Assets/Levels/level_20.unity
+    guid: 11cdff7863bb6764ab40faa121638b66
+  - enabled: 1
+    path: Assets/Levels/level_21.unity
+    guid: ac50abae981fd7f458daf92bab2fb64d
+  - enabled: 1
+    path: Assets/Levels/level_22.unity
+    guid: 12c6a4224601171448a42f07280c9eb0
+  - enabled: 1
+    path: Assets/Levels/level_23.unity
+    guid: 168de74076ea2844ca9509c9b5193234
+  - enabled: 1
+    path: Assets/Levels/level_24.unity
+    guid: 848a6125cde5f76488d8b6ed139254f0
+  - enabled: 1
+    path: Assets/Levels/level_25.unity
+    guid: 6874e7487f96b3e4bbf418c58a9a52e7
+  - enabled: 1
+    path: Assets/Levels/level_26.unity
+    guid: 34384960f2779314985b8b3d5749d2ef
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000

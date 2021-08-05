@@ -20,7 +20,7 @@ public class Trigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         crateSpawner.yHeight++;
-        crateSpawner.ghostSpeed = (crateSpawner.ghostSpeed * 7) / 10;
+        crateSpawner.ghostSpeed = (crateSpawner.ghostSpeed * 9) / 10;
         
        
     }

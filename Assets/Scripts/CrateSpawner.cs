@@ -97,25 +97,29 @@ public class CrateSpawner : MonoBehaviour
         {
             ghostSpeed = 0.15f;
             spawnableCrate = 22;
-            spawnableCrate -= currentLevelIDx * 2;
+            spawnableCrate -= currentLevelIDx;
         }
         else if (currentLevelIDx >= 10 && currentLevelIDx <= 15)
         {
             ghostSpeed = 0.13f;
-            spawnableCrate = 22;
-            spawnableCrate -= currentLevelIDx * 2;
+            spawnableCrate = 23;
+            spawnableCrate -= currentLevelIDx;
         }
         else if (currentLevelIDx >= 15 && currentLevelIDx <= 20)
         {
             ghostSpeed = 0.10f;
-            spawnableCrate = 22;
-            spawnableCrate -= currentLevelIDx * 2;
+            spawnableCrate = 28;
+            spawnableCrate -= currentLevelIDx;
         }
         else if (currentLevelIDx >= 20 && currentLevelIDx <= 25)
         {
-            ghostSpeed = 0.10f;
-            spawnableCrate = 20;
-            spawnableCrate -= currentLevelIDx * 3;
+            ghostSpeed = 0.08f;
+            spawnableCrate = 33;
+            spawnableCrate -= currentLevelIDx;
+        }
+        else if (currentLevelIDx == 26)
+        {
+            isGameActive = false;
         }
         spawnableCrateText.text = spawnableCrate.ToString();
 
@@ -130,14 +134,6 @@ public class CrateSpawner : MonoBehaviour
             spawnableCrateText.text = spawnableCrate.ToString();
 
 
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isGameActive = !isGameActive;
-            if (isGameActive)
-            {
-                StartCoroutine(GhostMover());
-            }
         }
         else if (yHeight >= yHeightMax) // win this level
         {
@@ -159,7 +155,7 @@ public class CrateSpawner : MonoBehaviour
 
         if (currentLevelID == PlayerPrefs.GetInt("levelNumber"))
         {
-            Debug.Log("Oyun Sonu");
+            Debug.Log("The End");
             endLevelPanel.transform.GetChild(1).gameObject.SetActive(false);
         }
         else

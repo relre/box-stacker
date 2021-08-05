@@ -27,7 +27,7 @@ public class LevelSystem : MonoBehaviour
             levels[i].GetComponent<RawImage>().texture = lockOpenTexture; // button lock texture
             levels[i].GetComponent<Button>().onClick.AddListener(soundManager.AudioButton); // button click sound
         }
-        Debug.Log(PlayerPrefs.GetInt("level") + "lockOpen level sayýsý");
+        Debug.Log(PlayerPrefs.GetInt("level"));
     }
 
     public string levelID(int id)
