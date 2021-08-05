@@ -9,7 +9,7 @@
  mobile unity game
 
 assets:
-Cartoon FX Free JMO - https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-109565
-Freepik UI Asset https://www.freepik.com/free-vector/wooden-gold-buttons-ui-game_12760665.htm
-Unity Learn - Junior Programmer Course Assets
+Cartoon FX Free JMO - https://assetstore.unity.com/packages/vfx/particles/cartoon-fx-free-109565<br/>
+Freepik UI Asset https://www.freepik.com/free-vector/wooden-gold-buttons-ui-game_12760665.htm<br/>
+Unity Learn - Junior Programmer Course Assets<br/>
 menu music: jrflexible
